@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: paymentmicroservice
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: paymentmicroservice
+    spec:
+      containers:
+      - image: rajagupt/payment
+        name: paymentmicroservice
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        imagePullPolicy: Always
+        ports:
+        - name: payment-port
+          containerPort: 8082
+status: {}
