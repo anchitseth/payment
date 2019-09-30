@@ -6,7 +6,8 @@ import lombok.Data;
 public class PaymentRequestDto {
 
 	Long producerOrderId;
-	Long price;
+	Float amount;
 	String producerEmailId;
+	String consumerEmailId;
 	
 }

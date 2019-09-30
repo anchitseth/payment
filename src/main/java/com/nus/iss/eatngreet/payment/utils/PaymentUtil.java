@@ -18,7 +18,7 @@ public class PaymentUtil {
 		return decryptedEmail;
 	}
 
-	public static Boolean isValidEmail(String email) {
+	public static boolean isValidEmail(String email) {
 		if (isStringEmpty(email))
 			return false;
 		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
