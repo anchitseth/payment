@@ -51,7 +51,7 @@ public class PaymentRestController {
 	
 	@GetMapping("/health-check")
 	public String healthCheck() {
-		return "Payment microservice is up and running. :D";
+		return "Payment microservice is up and running. :)";
 	}
 
 }
