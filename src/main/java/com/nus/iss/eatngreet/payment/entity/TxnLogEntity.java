@@ -34,8 +34,8 @@ public class TxnLogEntity {
 	@Column(name = "amount")
 	Float amount;
 
-	@Column(name = "consumer_order_id")
-	Long consumerOrderId;
+	@Column(name = "producer_order_id")
+	Long producerOrderId;
 	
 	@Column(name = "txn_type")
 	String txnType;

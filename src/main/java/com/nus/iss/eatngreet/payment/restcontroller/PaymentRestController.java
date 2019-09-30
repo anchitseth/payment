@@ -22,31 +22,36 @@ public class PaymentRestController {
 	@Autowired
 	PaymentService paymentService;
 	
+	// pay for a txn
 	@PostMapping("/now")
-	CommonResponseDto payNow(@RequestBody PaymentRequestDto requestObj) {
+	public CommonResponseDto payNow(@RequestBody PaymentRequestDto requestObj) {
+		return paymentService.executeBookingTransaction(requestObj);
+	}
+	
+	// get all user txn
+	@PostMapping("/get-all-txns")
+	public CommonResponseDto getAllTxns() {
 		return null;
 	}
 	
-	// 1. signup pe 20 SGD
 	@PostMapping("/signup-bonus")
-	CommonResponseDto newUser(@RequestBody Map<String, String> request) {
+	public CommonResponseDto newUser(@RequestBody Map<String, String> request) {
 		return paymentService.signupBonus(request);
 	}
-	
-	// 2. api to add balance
+
 	@PostMapping("/topup")
-	CommonResponseDto addBalance(HttpServletRequest request, @RequestBody Map<String, Object> requestObj) {
+	public CommonResponseDto addBalance(HttpServletRequest request, @RequestBody Map<String, Object> requestObj) {
 		return paymentService.topup(request, requestObj);
 	}
 	
 	@PostMapping("/get-balance")
-	CommonResponseDto getUserBalance(HttpServletRequest request) {
+	public CommonResponseDto getUserBalance(HttpServletRequest request) {
 		return paymentService.getUserBalance(request);
 	}
 	
 	@GetMapping("/health-check")
 	public String healthCheck() {
-		return "Payment microservice is up and running.";
+		return "Payment microservice is up and running. :D";
 	}
 
 }

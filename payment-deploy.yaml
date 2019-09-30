@@ -10,7 +10,7 @@ spec:
         app: paymentmicroservice
     spec:
       containers:
-      - image: rajagupt/payment:2
+      - image: d3334/paymentms:3
         name: paymentmicroservice
         resources:
           limits:
