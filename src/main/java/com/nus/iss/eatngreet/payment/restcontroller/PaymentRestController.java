@@ -4,6 +4,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,36 +24,36 @@ public class PaymentRestController {
 	@Autowired
 	PaymentService paymentService;
 	
-	// pay for a txn
+	private static final Logger logger = LoggerFactory.getLogger(PaymentRestController.class);
+	
 	@PostMapping("/now")
 	public CommonResponseDto payNow(@RequestBody PaymentRequestDto requestObj) {
+		logger.info("payNow() of PaymentRestController. Request Obj: {}", requestObj);
 		return paymentService.executeBookingTransaction(requestObj);
 	}
 	
-	// get all user txn
-	@PostMapping("/get-all-txns")
-	public CommonResponseDto getAllTxns() {
-		return null;
-	}
-	
 	@PostMapping("/signup-bonus")
-	public CommonResponseDto newUser(@RequestBody Map<String, String> request) {
-		return paymentService.signupBonus(request);
+	public CommonResponseDto newUser(@RequestBody Map<String, String> requestObj) {
+		logger.info("newUser() of PaymentRestController. Request Obj: {}", requestObj);
+		return paymentService.signupBonus(requestObj);
 	}
 
 	@PostMapping("/topup")
 	public CommonResponseDto addBalance(HttpServletRequest request, @RequestBody Map<String, Object> requestObj) {
+		logger.info("addBalance() of PaymentRestController. Request Obj: {}", requestObj);
 		return paymentService.topup(request, requestObj);
 	}
 	
 	@PostMapping("/get-balance")
 	public CommonResponseDto getUserBalance(HttpServletRequest request) {
+		logger.info("getUserBalance() of PaymentRestController. Request Obj: {}", request);
 		return paymentService.getUserBalance(request);
 	}
 	
 	@GetMapping("/health-check")
 	public String healthCheck() {
-		return "Payment microservice is up and running. :)";
+		logger.info("healthCheck() of PaymentRestController.");
+		return "Payment microservice is up and running.";
 	}
 
 }

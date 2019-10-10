@@ -13,9 +13,8 @@ public class PaymentUtil {
 	}
 
 	public static String getEmailFromHeaders(HttpServletRequest request) {
-		String authToken = request.getHeader("Authorization").substring("Basic".length()).trim();
-		String decryptedEmail = new String(Base64.getDecoder().decode(authToken)).split(":")[0];
-		return decryptedEmail;
+		String authToken = request.getHeader(Constants.AUTHORIZATION_HEADER_NAME).substring("Basic".length()).trim();
+		return new String(Base64.getDecoder().decode(authToken)).split(":")[0];
 	}
 
 	public static boolean isValidEmail(String email) {
@@ -27,11 +26,16 @@ public class PaymentUtil {
 		return pat.matcher(email).matches();
 	}
 
+	@SuppressWarnings("rawtypes")
 	public static boolean isListEmpty(List list) {
 		boolean isEmpty = true;
 		if (list != null && !list.isEmpty()) {
 			isEmpty = false;
 		}
 		return isEmpty;
+	}
+
+	private PaymentUtil() {
+
 	}
 }
